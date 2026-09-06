@@ -1,3 +1,5 @@
+import type { Message } from "../conversation/message.js";
+
 export interface AIProvider {
-  generate(prompt: string): Promise<string>;
+  generate(messages: Message[]): Promise<string>;
 }

@@ -9,7 +9,7 @@ export class AgentService {
   async process(input: string): Promise<string> {
     this.messages.push({ role: "user", content: input });
 
-    const response = await this.ai.generate(input);
+    const response = await this.ai.generate(this.messages);
 
     this.messages.push({ role: "assistant", content: response });
 
