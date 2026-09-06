@@ -8,19 +8,21 @@ export class AgentService {
     private readonly memory: MemoryService,
   ) {}
 
-  async process(input: string): Promise<string> {
+  async process(conversationId: number, input: string): Promise<string> {
     const userMessage: Message = {
+      conversationId,
       role: "user",
       content: input,
     };
 
     await this.memory.addMessage(userMessage);
 
-    const messages = await this.memory.getMessages();
+    const messages = await this.memory.getMessages(conversationId);
 
     const response = await this.ai.generate(messages);
 
     const assistantMessage: Message = {
+      conversationId,
       role: "assistant",
       content: response,
     };
