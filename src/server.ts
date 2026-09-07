@@ -1,6 +1,8 @@
+import "dotenv/config";
+
 import app from "./app.js";
 import { AIService } from "./ai/ai.service.js";
-import { FakeAIProvider } from "./ai/fake-ai.provider.js";
+import { GeminiProvider } from "./ai/gemini.provider.js";
 import { AgentService } from "./agent/agent.service.js";
 import { MemoryRepository } from "./memory/memory.repository.js";
 import { MemoryService } from "./memory/memory.service.js";
@@ -9,7 +11,7 @@ import { createConversationRoutes } from "./routes/conversation.routes.js";
 
 const PORT = 3000;
 
-const aiProvider = new FakeAIProvider();
+const aiProvider = new GeminiProvider();
 
 const aiService = new AIService(aiProvider);
 
