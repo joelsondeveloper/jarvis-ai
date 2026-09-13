@@ -4,6 +4,10 @@ import { MemoryRepository } from "./memory.repository.js";
 export class MemoryService {
   constructor(private readonly repository: MemoryRepository) {}
 
+  hasConversation(conversationId: number): boolean {
+    return this.repository.hasConversation(conversationId);
+  }
+
   createConversation(): number {
     return this.repository.createConversation();
   }
@@ -14,5 +18,13 @@ export class MemoryService {
 
   async getMessages(conversationId: number): Promise<Message[]> {
     return this.repository.getMessages(conversationId);
+  }
+
+  getInteractionId(conversationId: number): string | null {
+    return this.repository.getInteractionId(conversationId);
+  }
+
+  setInteractionId(conversationId: number, interactionId: string): void {
+    this.repository.setInteractionId(conversationId, interactionId);
   }
 }

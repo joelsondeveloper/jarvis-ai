@@ -4,7 +4,9 @@
     "@google/genai": "^2.21.0",
     "better-sqlite3": "^13.0.3",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "openai": "^7.10.0",
+    "quickjs-emscripten": "^0.32.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
@@ -14,6 +16,9 @@
     "typescript": "^7.0.2"
   },
   "scripts": {
-    "dev": "tsx src/server.ts"
+    "dev": "tsx src/server.ts",
+    "test:gemini": "tsx scripts/gemini-smoke.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.js"
   }
 }

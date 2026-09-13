@@ -2,6 +2,10 @@ import type { Message } from "../conversation/message.js";
 import { database } from "../database/database.js";
 
 export class MemoryRepository {
+  hasConversation(conversationId: number): boolean {
+    return database.prepare("SELECT 1 FROM conversations WHERE id = ?").get(conversationId) !== undefined;
+  }
+
    createConversation(): number {
     const statement = database.prepare(`
       INSERT INTO conversations DEFAULT VALUES
@@ -47,4 +51,36 @@ export class MemoryRepository {
 
     return statement.all(conversationId) as Message[];
   }
+
+  getInteractionId(
+  conversationId: number,
+): string | null {
+  const statement = database.prepare(`
+    SELECT interaction_id AS interactionId
+    FROM conversations
+    WHERE id = ?
+  `);
+
+  const conversation = statement.get(
+    conversationId,
+  ) as { interactionId?: string } | undefined;
+
+  return conversation?.interactionId ?? null;
+}
+
+setInteractionId(
+  conversationId: number,
+  interactionId: string,
+): void {
+  const statement = database.prepare(`
+    UPDATE conversations
+    SET interaction_id = ?
+    WHERE id = ?
+  `);
+
+  statement.run(
+    interactionId,
+    conversationId,
+  );
+}
 }

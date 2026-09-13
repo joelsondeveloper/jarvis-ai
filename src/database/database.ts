@@ -1,12 +1,13 @@
 import Database from "better-sqlite3";
 
-const database: Database.Database = new Database("jarvis.db");
+const database: Database.Database = new Database(process.env.JARVIS_DATABASE_PATH ?? "jarvis.db");
 
 database.pragma("journal_mode = WAL");
 
 database.exec(`
   CREATE TABLE IF NOT EXISTS conversations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    interaction_id TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 

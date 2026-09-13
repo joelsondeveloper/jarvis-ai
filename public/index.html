@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>JARVIS</title>
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">J</div>
+        <div>
+          <h1>JARVIS</h1>
+          <span class="status"><span class="status-dot" aria-hidden="true"></span> ONLINE</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="voice-toggle" class="secondary-button" type="button" aria-pressed="false">Voz: desligada</button>
+        <button id="voice-stop" class="secondary-button" type="button">Parar voz</button>
+        <select id="voice-select" class="voice-select" aria-label="Voz do JARVIS" disabled></select>
+        <button id="new-conversation" class="secondary-button" type="button">+ Nova conversa</button>
+      </div>
+    </header>
+
+
+    <section
+      id="messages" role="log" aria-live="polite"
+      class="messages"
+    >
+
+      <div class="empty-state message assistant">
+        JARVIS online.
+        <span>Posso conversar, analisar arquivos e executar tarefas com sua aprovação.</span>
+      </div>
+
+    </section>
+
+
+    <section
+      id="confirmation"
+      class="confirmation hidden"
+    >
+
+      <div class="confirmation-title"><span class="warning-icon" aria-hidden="true">!</span> Confirmação necessária</div>
+
+      <div
+        id="confirmation-text"
+        class="confirmation-text"
+      >
+      </div>
+
+      <div class="confirmation-buttons">
+
+        <button
+          id="confirm-button"
+          class="confirm"
+        >
+          Permitir ação
+        </button>
+
+        <button
+          id="cancel-button"
+          class="cancel"
+        >
+          Recusar
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <section id="task-panel" class="task-panel" hidden>
+      <div class="task-heading"><span class="task-pulse" aria-hidden="true"></span><strong id="task-status" role="status"></strong></div>
+      <details open><summary>Etapas e resultados</summary><pre id="task-details"></pre></details>
+    </section>
+
+    <form
+      id="chat-form"
+      class="input-area"
+    >
+
+      <input
+        id="prompt" maxlength="10000" aria-label="Mensagem"
+        type="text"
+        placeholder="Fale com o JARVIS..."
+        autocomplete="off"
+      >
+
+      <button type="submit">
+        Enviar
+      </button>
+
+    </form>
+
+  </main>
+
+  <script type="module" src="/app.js"></script>
+
+</body>
+</html>

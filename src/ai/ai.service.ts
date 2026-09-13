@@ -1,10 +1,19 @@
 import type { AIProvider } from "./ai.provider.js";
-import type { Message } from "../conversation/message.js";
 
 export class AIService {
-    constructor(private readonly provider: AIProvider) {}
+  constructor(private readonly provider: AIProvider) {}
 
-    async generate(messages: Message[]): Promise<string> {
-        return this.provider.generate(messages);
-    }
+  async generate(
+    input: string,
+    previousInteractionId?: string | null,
+  ): Promise<{
+    text: string;
+    interactionId: string;
+  }> {
+    return this.provider.generate(input, previousInteractionId);
+  }
+
+  async *generateStream(input: string, previousInteractionId?: string | null) {
+    yield* this.provider.generateStream(input, previousInteractionId);
+  }
 }
